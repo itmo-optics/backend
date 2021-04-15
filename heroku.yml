@@ -1,0 +1,14 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: database
+  config:
+    S3_BUCKET: bucket
+build:
+  docker:
+    backend: dockerfile
+  config:
+    NODE_ENV: production
+    FOO: bar
+run:
+  backend: bundle exec puma -C config/puma.rb
