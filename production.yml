@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
   backend:
@@ -27,13 +27,14 @@ services:
   nginx:
     image: nginx:latest
     restart: always
-    entrypoint: nginx -g 'daemon off;'
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - backend
     ports:
-      - 80:80
+      - 0.0.0.0:443:443
+      - 0.0.0.0:80:80
 
 volumes:
   database:
